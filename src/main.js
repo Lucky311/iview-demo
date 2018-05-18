@@ -44,7 +44,7 @@ Vue.component('chart', ECharts)
 
 Vue.component('full-calendar', fullCalendar)
 
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(VueI18n);
 Vue.use(VueAwesomeSwiper)
 Vue.use(iView);
