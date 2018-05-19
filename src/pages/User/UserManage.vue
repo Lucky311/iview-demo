@@ -1,11 +1,24 @@
 <template>
   <div>
-      后台用户管理
+      {{chat}}
   </div>
 </template>
 <script>
+import { mapGetters,mapActions } from 'vuex'
 export default {
-  name:"banner"
+  name:"uesr-manage",
+  methods:{
+    ...mapActions(['getMsg']),
+  },
+  computed: {
+    ...mapGetters(['chat'])
+  },
+  mounted(){
+    this.getMsg();   
+    // if(this.chat != ""){
+    //   this.getMsg();
+    // }
+  }
 }
 </script>
 <style>

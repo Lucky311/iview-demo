@@ -1,37 +1,19 @@
 import Vue from 'vue';
-const isServer = Vue.prototype.$isServer;
-console.log(Vue.prototype)
 
-/* istanbul ignore next */
-export const on = (function() {
-    if (!isServer && document.addEventListener) {
-        return function(element, event, handler) {
-            if (element && event && handler) {
-                element.addEventListener(event, handler, false);
+export default function getData(commit,payload){
+    return (
+        Vue.prototype.axios("/api/chat/getchatmsg").then(res=>{
+            console.log(res.data.jiachunhua)
+            const msgs = res.data.jiachunhua;
+            commit('changeMsg',{msgs})
+            if(msgs == ""){
+                console.log("res.data.jiachunhua")
+                getData(commit,payload)
+            }else{
+                getData(commit,payload)
+                
             }
-        };
-    } else {
-        return function(element, event, handler) {
-            if (element && event && handler) {
-                element.attachEvent('on' + event, handler);
-            }
-        };
-    }
-})();
-
-/* istanbul ignore next */
-export const off = (function() {
-    if (!isServer && document.removeEventListener) {
-        return function(element, event, handler) {
-            if (element && event) {
-                element.removeEventListener(event, handler, false);
-            }
-        };
-    } else {
-        return function(element, event, handler) {
-            if (element && event) {
-                element.detachEvent('on' + event, handler);
-            }
-        };
-    }
-})();
+            
+        })
+    )
+}
